@@ -1,0 +1,54 @@
+/* styles to make our anime cover images a nice size */
+.cover-image {
+    width: 80px;
+    height: 100px;
+}
+
+/* style all table elements on the page */
+table {
+    border-collapse: collapse; /* remove the gap between the table cells */
+    border: 1px solid black; /* add a border around the outside of the table */
+}
+
+th {
+    border: 1px solid black; /* add a border around each header cell */
+}
+
+tbody td {
+    border-bottom: 1px solid black; /* add a line beneath each row of the table */
+    padding: 1em; /* give each table cell in the body some extra room */
+}
+
+/* color the blockquote text */
+blockquote {
+    color: darkgoldenrod;
+    background-color: lightgray;
+}
+
+/* styles for the pokemon game */
+#grass {
+    height: 50vh;
+    background: url("images/grass.png");
+}
+
+#pokedex {
+    border: 2px dashed red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em;
+}
+
+#pokedex-img {
+    height: 100px;
+}
+
+#pokedex-pokemon {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-rows: min-content;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1em;
+    height: 100%;
+    width: 100%;
+}
