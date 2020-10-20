@@ -35,7 +35,7 @@ form > * {
 
 #preview-pane > .pane-title {
     display: grid;
-    grid-template-columns: 1fr min-content min-content;
+    grid-template-columns: 1fr max-content max-content;
     gap: 1em;
     justify-content: center;
     align-items: center;

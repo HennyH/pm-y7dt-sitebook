@@ -67,7 +67,7 @@
 
         const newProject = createNewProject();
         projects.push(newProject);
-        const openButtonElement = createProjectOpenButton(openedProject);
+        const openButtonElement = createProjectOpenButton(newProject);
         openButtonElement.click();
     });
 
@@ -122,14 +122,14 @@
             
             /* add in the styles */
             const styleElement = previewDocument.createElement("style");
-            styleElement.innerText = openedProject.css;
+            styleElement.innerHTML = openedProject.css;
             previewDocument.head.append(styleElement);
             previewDocument.head.remov
             
             /* add in the script */
             const jsElement = previewDocument.createElement("script");
             jsElement.type = "text/javascript";
-            jsElement.innerText = openedProject.js;
+            jsElement.innerHTML = openedProject.js;
             previewDocument.body.append(jsElement);
 
             /* grab out the title and put it in the editor tab */
