@@ -3,6 +3,7 @@
     const preview = document.getElementById("preview");
     const newProjectButton = document.getElementById("new-project-button");
     const projectList = document.getElementById("project-list");
+    const previewPaneTitle = document.getElementById("preview-title");
     const projects = JSON.parse(localStorage.getItem("projects")) || [];
     let currentProject = undefined;
     let htmlCode = "";
@@ -28,6 +29,8 @@
             projectBtn.className = ACTIVE_PROJECT_BTN;
         });
         projectList.append(projectBtn);
+
+        return projectBtn;
     }
 
     function saveCurrentProject() {
@@ -79,8 +82,8 @@
         saveCurrentProject();
         const project = createNewProject();
         projects.push(project);
-        addProjectBtn(project);
-        openProject(project);
+        const openBtn = addProjectBtn(project);
+        openBtn.click();
     });
 
     for (const project of projects) {
@@ -120,23 +123,25 @@
 
     function refreshPreview() {
         saveCurrentProject();
-        preview.srcdoc = `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-                <style>
-                    ${cssCode}
-                </style>
-            </head>
-            <body>
-                ${htmlCode}
-                <script type="text/javascript"> 
-                    ${jsCode}
-                </script>
-            </body>
-            </html>`;
+        preview.srcdoc = htmlCode;
+        preview.addEventListener("load", e => {
+            const previewDocument = preview.contentDocument;
+            
+            /* add in the styles */
+            const styleElement = previewDocument.createElement("style");
+            styleElement.innerText = cssCode;
+            previewDocument.head.append(styleElement);
+            
+            /* add in the script */
+            const jsElement = previewDocument.createElement("script");
+            jsElement.type = "text/javascript";
+            jsElement.innerText = jsCode;
+            previewDocument.body.append(jsElement);
+
+            /* grab out the title and put it in the editor tab */
+            const maybeTitle = preview.contentDocument.querySelector("title")
+            previewPaneTitle.textContent = !!maybeTitle ? maybeTitle.textContent : "Preview";
+        });
     }
 
     const refreshButton = document.getElementById("refresh");

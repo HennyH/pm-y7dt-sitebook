@@ -33,7 +33,7 @@ form > * {
     flex-grow: 1;
 }
 
-#preview-pane-title {
+.preview-pane > .pane-title {
     display: grid;
     grid-template-columns: 1fr max-content;
     justify-content: center;
@@ -52,7 +52,9 @@ iframe {
 }
 
 .open-project-btn.active {
-    background-color: lightskyblue;
+    font-weight: bold;
+    color: green;
+
 }
 
 #editor:not(.editable) .CodeMirror, #editor:not(.editable) iframe {
