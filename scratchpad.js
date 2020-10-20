@@ -89,6 +89,13 @@
 
     
     /* editor functionality */
+    const commonEditorSettings = {
+        readOnly: true,
+        lineNumbers: true,
+        lint: true,
+        gutters: ["CodeMirror-lint-markers"],
+
+    }
     const htmlTextArea = document.getElementById("html");
     const htmlEditor = CodeMirror.fromTextArea(htmlTextArea, {
         mode: {
@@ -96,22 +103,19 @@
             htmlMode: true,
             matchClosing: true
         },
-        readOnly: true,
-        lineNumbers: true,
+        ...commonEditorSettings
     });
 
     const cssTextArea = document.getElementById("css");
     const cssEditor = CodeMirror.fromTextArea(cssTextArea, {
         mode: "css",
-        lineNumbers: true,
-        readOnly: true
+        ...commonEditorSettings
     });
 
     const jsTextArea = document.getElementById("js");
     const jsEditor = CodeMirror.fromTextArea(jsTextArea, {
         mode: "javascript",
-        lineNumbers: true,
-        readOnly: true
+        ...commonEditorSettings
     })
 
     function refreshPreview() {
