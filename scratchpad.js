@@ -2,16 +2,13 @@
     const editor = document.getElementById("editor");
     const preview = document.getElementById("preview");
     const newProjectButton = document.getElementById("new-project-button");
-    const projectList = document.getElementById("project-list");
+    const projectListElement = document.getElementById("project-list");
     const previewPaneTitle = document.getElementById("preview-title");
     let projects = JSON.parse(localStorage.getItem("projects")) || [];
-    let currentProjectName = undefined;
-    let htmlCode = "";
-    let cssCode = "";
-    let jsCode = "";
+    let openedProject = undefined;
 
     /* project management */
-    function addProjectBtn(project) {
+    function createProjectOpenButton(project) {
         const NOT_ACTIVE_PROJECT_BTN = "open-project-btn";
         const ACTIVE_PROJECT_BTN = "open-project-btn active";
         const projectBtn = document.createElement("button");
@@ -20,80 +17,62 @@
         projectBtn.addEventListener("click", e => {
             e.preventDefault();
             e.stopPropagation();
-
-            openProject(project.name);
+            openProject(project);
 
             for (const btn of document.getElementsByClassName("open-project-btn")) {
                 btn.className = NOT_ACTIVE_PROJECT_BTN;
             }
-
             projectBtn.className = ACTIVE_PROJECT_BTN;
         });
-        projectList.append(projectBtn);
 
+        projectListElement.append(projectBtn);
         return projectBtn;
-    }
-
-    function saveCurrentProject() {
-        if (!currentProjectName) return;
-
-        projects = projects.map(project => {
-            if (project.name === currentProjectName) {
-                return { ...project, html: htmlCode, css: cssCode, js: jsCode };
-            }
-            return project;
-        });
-
-        console.log('saving', currentProjectName, projects)
-        localStorage.setItem("projects", JSON.stringify(projects));
     }
 
     function createNewProject() {
         let name;
         while (true) {
             name = window.prompt("Name of project: ");
-            if (projects.some(p => p.name === name)) {
-                alert("This name is already in use");
-                continue;
+            if (!projects.some(p => p.name === name)) {
+                break;
             }
 
-            break;
+            alert("This name is already in use");
         }
 
         return { name, html: "", css: "", js: ""};
     }
 
-    function openProject(projectName) {
-        currentProjectName = projectName;
-        const { html, css, js }= projects.find(({ name }) => name === projectName);
-        htmlCode = html;
-        cssCode = css;
-        jsCode = js;
+    function openProject(project) {
+        openedProject = project;
 
         editor.className = "editable";
         htmlEditor.setOption("readOnly", false);
-        htmlEditor.setValue(htmlCode);
+        htmlEditor.setValue(openedProject.html);
         cssEditor.setOption("readOnly", false);
-        cssEditor.setValue(cssCode);
+        cssEditor.setValue(openedProject.css);
         jsEditor.setOption("readOnly", false);
-        jsEditor.setValue(jsCode);
+        jsEditor.setValue(openedProject.js);
         refreshPreview();
+    }
+
+    function saveProjects() {
+        localStorage.setItem("projects", JSON.stringify(projects));
     }
 
     newProjectButton.addEventListener("click", e => {
         e.preventDefault();
         e.stopPropagation();
 
-        const project = createNewProject();
-        projects.push(project);
-        const openBtn = addProjectBtn(project);
-        openBtn.click();
+        const newProject = createNewProject();
+        projects.push(newProject);
+        const openButtonElement = createProjectOpenButton(openedProject);
+        openButtonElement.click();
     });
 
     for (const project of projects) {
-        addProjectBtn(project);
+        createProjectOpenButton(project);
     }
-
     
     /* editor functionality */
     const commonEditorSettings = {
@@ -129,20 +108,20 @@
     })
 
     function refreshPreview() {
-        saveCurrentProject();
-        preview.srcdoc = htmlCode;
+        saveProjects();
+        preview.srcdoc = openedProject.html;
         preview.addEventListener("load", e => {
             const previewDocument = preview.contentDocument;
             
             /* add in the styles */
             const styleElement = previewDocument.createElement("style");
-            styleElement.innerText = cssCode;
+            styleElement.innerText = openedProject.css;
             previewDocument.head.append(styleElement);
             
             /* add in the script */
             const jsElement = previewDocument.createElement("script");
             jsElement.type = "text/javascript";
-            jsElement.innerText = jsCode;
+            jsElement.innerText = openedProject.js;
             previewDocument.body.append(jsElement);
 
             /* grab out the title and put it in the editor tab */
@@ -160,19 +139,19 @@
     
     htmlEditor.on("change", ({from, to, text, removed, origin}) => {
         htmlEditor.save();
-        htmlCode = htmlTextArea.value;
+        openedProject.html = htmlTextArea.value;
         refreshPreview();
     });
 
     cssEditor.on("change", ({from, to, text, removed, origin}) => {
         cssEditor.save();
-        cssCode = cssTextArea.value;
+        openedProject.css = cssTextArea.value;
         refreshPreview();
     });
 
     jsEditor.on("change", ({from, to, text, removed, origin}) => {
         jsEditor.save();
-        jsCode = jsTextArea.value;
+        openedProject.js = jsTextArea.value;
         refreshPreview();
     });
 })();
