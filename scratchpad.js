@@ -41,6 +41,10 @@
             alert("This name is already in use");
         }
 
+        if (name === null) {
+            return;
+        }
+
         return { name, html: "", css: "", js: ""};
     }
 
