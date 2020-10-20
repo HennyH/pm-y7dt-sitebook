@@ -118,7 +118,10 @@
     const jsTextArea = document.getElementById("js");
     const jsEditor = CodeMirror.fromTextArea(jsTextArea, {
         mode: "javascript",
-        ...commonEditorSettings
+        ...commonEditorSettings,
+        lint: {
+            esversion: 6
+        }
     })
 
     function refreshPreview() {
