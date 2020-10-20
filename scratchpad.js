@@ -1,9 +1,10 @@
 (function () {
     const editor = document.getElementById("editor");
-    const preview = document.getElementById("preview");
+    let previewPane = document.getElementById("preview-pane");
     const newProjectButton = document.getElementById("new-project-button");
     const projectListElement = document.getElementById("project-list");
     const previewPaneTitle = document.getElementById("preview-title");
+    const downloadButton = document.getElementById("download");
     let projects = JSON.parse(localStorage.getItem("projects")) || [];
     let openedProject = undefined;
 
@@ -109,6 +110,12 @@
 
     function refreshPreview() {
         saveProjects();
+
+        let preview = document.getElementById("preview");
+        previewPane.removeChild(preview);
+
+        preview = document.createElement("iframe");
+        preview.id = "preview";
         preview.srcdoc = openedProject.html;
         preview.addEventListener("load", e => {
             const previewDocument = preview.contentDocument;
@@ -117,6 +124,7 @@
             const styleElement = previewDocument.createElement("style");
             styleElement.innerText = openedProject.css;
             previewDocument.head.append(styleElement);
+            previewDocument.head.remov
             
             /* add in the script */
             const jsElement = previewDocument.createElement("script");
@@ -128,6 +136,7 @@
             const maybeTitle = preview.contentDocument.querySelector("title")
             previewPaneTitle.textContent = !!maybeTitle ? maybeTitle.textContent : "Preview";
         });
+        previewPane.append(preview);
     }
 
     const refreshButton = document.getElementById("refresh");
@@ -153,5 +162,25 @@
         jsEditor.save();
         openedProject.js = jsTextArea.value;
         refreshPreview();
+    });
+
+    /* taken from https://stackoverflow.com/questions/35038884/download-file-from-bytes-in-javascript */
+     function saveByteArray(filename, bytes, mime) {
+        var blob = new Blob([bytes], {type: mime});
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        var fileName = filename;
+        link.download = fileName;
+        link.click();
+    };
+
+    downloadButton.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const preview = document.getElementById("preview");
+        const html = preview.contentDocument.documentElement.innerHTML;
+        const formattedHtml = tidy_html5(html);
+        saveByteArray("index.html", formattedHtml, "text/html");
     });
 })();

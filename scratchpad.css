@@ -33,9 +33,10 @@ form > * {
     flex-grow: 1;
 }
 
-.preview-pane > .pane-title {
+#preview-pane > .pane-title {
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-columns: 1fr min-content min-content;
+    gap: 1em;
     justify-content: center;
     align-items: center;
 }
