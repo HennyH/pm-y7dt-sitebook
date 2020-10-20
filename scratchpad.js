@@ -4,8 +4,8 @@
     const newProjectButton = document.getElementById("new-project-button");
     const projectList = document.getElementById("project-list");
     const previewPaneTitle = document.getElementById("preview-title");
-    const projects = JSON.parse(localStorage.getItem("projects")) || [];
-    let currentProject = undefined;
+    let projects = JSON.parse(localStorage.getItem("projects")) || [];
+    let currentProjectName = undefined;
     let htmlCode = "";
     let cssCode = "";
     let jsCode = "";
@@ -20,7 +20,8 @@
         projectBtn.addEventListener("click", e => {
             e.preventDefault();
             e.stopPropagation();
-            openProject(project);
+
+            openProject(project.name);
 
             for (const btn of document.getElementsByClassName("open-project-btn")) {
                 btn.className = NOT_ACTIVE_PROJECT_BTN;
@@ -34,15 +35,17 @@
     }
 
     function saveCurrentProject() {
-        if (currentProject === undefined) return;
+        if (!currentProjectName) return;
 
-        const data = projects.map(project => {
-            if (project.name === currentProject.name) {
+        projects = projects.map(project => {
+            if (project.name === currentProjectName) {
                 return { ...project, html: htmlCode, css: cssCode, js: jsCode };
             }
             return project;
         });
-        localStorage.setItem("projects", JSON.stringify(data));
+
+        console.log('saving', currentProjectName, projects)
+        localStorage.setItem("projects", JSON.stringify(projects));
     }
 
     function createNewProject() {
@@ -60,11 +63,12 @@
         return { name, html: "", css: "", js: ""};
     }
 
-    function openProject(project) {
-        currentProject = project;
-        htmlCode = project.html;
-        cssCode = project.css;
-        jsCode = project.js;
+    function openProject(projectName) {
+        currentProjectName = projectName;
+        const { html, css, js }= projects.find(({ name }) => name === projectName);
+        htmlCode = html;
+        cssCode = css;
+        jsCode = js;
 
         editor.className = "editable";
         htmlEditor.setOption("readOnly", false);
@@ -79,7 +83,7 @@
     newProjectButton.addEventListener("click", e => {
         e.preventDefault();
         e.stopPropagation();
-        saveCurrentProject();
+
         const project = createNewProject();
         projects.push(project);
         const openBtn = addProjectBtn(project);
@@ -117,7 +121,7 @@
 
     const jsTextArea = document.getElementById("js");
     const jsEditor = CodeMirror.fromTextArea(jsTextArea, {
-        mode: "javascript",
+        mode: "jsx",
         ...commonEditorSettings,
         lint: {
             esversion: 6
