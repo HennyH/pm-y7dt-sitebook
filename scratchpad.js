@@ -73,8 +73,8 @@
         if (maybeNewProject == null) {
             return;
         }
-        projects.push(newProject);
-        const openButtonElement = createProjectOpenButton(newProject);
+        projects.push(maybeNewProject);
+        const openButtonElement = createProjectOpenButton(maybeNewProject);
         openButtonElement.click();
     });
 
