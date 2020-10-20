@@ -1,0 +1,60 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: stretch;
+}
+
+form > * {
+    margin: 1em;
+    border: 1px solid black;
+}
+
+.pane {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+}
+
+.pane-title {
+    background-color: #f7f7f7;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.pane > textarea, .pane > iframe {
+    flex-grow: 1;
+}
+
+#preview-pane-title {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    justify-content: center;
+    align-items: center;
+}
+
+iframe {
+    border: none;
+}
+
+#project-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.open-project-btn.active {
+    background-color: lightskyblue;
+}
+
+#editor:not(.editable) .CodeMirror, #editor:not(.editable) iframe {
+    background-color: lightgray;
+}
