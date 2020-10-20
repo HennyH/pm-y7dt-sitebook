@@ -34,7 +34,7 @@
         let name;
         while (true) {
             name = window.prompt("Name of project: ");
-            if (!projects.some(p => p.name === name)) {
+            if (!projects.some(p => p.name === name) || name === null || name === "") {
                 break;
             }
 
@@ -42,7 +42,7 @@
         }
 
         if (name === null) {
-            return;
+            return null;
         }
 
         return { name, html: "", css: "", js: ""};
@@ -69,7 +69,10 @@
         e.preventDefault();
         e.stopPropagation();
 
-        const newProject = createNewProject();
+        const maybeNewProject = createNewProject();
+        if (maybeNewProject == null) {
+            return;
+        }
         projects.push(newProject);
         const openButtonElement = createProjectOpenButton(newProject);
         openButtonElement.click();
