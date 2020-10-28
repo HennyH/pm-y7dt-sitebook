@@ -8,10 +8,21 @@ This repository contains will contain all the code for our sitebook, and present
 
 # References
 
-1. [HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
-2. [Getting started with HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started)
-3. [Learn CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS)
-4. [CSS selectors game](https://flukeout.github.io/)
-5. [Flexbox frog game](https://flexboxfroggy.com/)
-6. [CSS grid game](https://cssgridgarden.com/)
-7. [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
+## HTML
+
+1. [Getting started with HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started)
+2. [HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+
+## CSS
+
+- Introductory
+  1. [Getting started with CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS)
+  2. [CSS selectors game (complete for a certificate!)](https://flukeout.github.io/)
+- CSS Grid
+  1. [CSS grid tutorial series](https://www.youtube.com/playlist?list=PLbSquHt1VCf1x_-1ytlVMT0AMwADlWtc1)
+  2. [CSS grid game](https://cssgridgarden.com/)
+- CSS Flexbox
+  1. [Flexbox frog game](https://flexboxfroggy.com/)
+- JavaScript
+  1. [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
+
