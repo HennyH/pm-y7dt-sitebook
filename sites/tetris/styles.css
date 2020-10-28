@@ -1,0 +1,134 @@
+/* general font, and color styles */
+
+html {
+    background-color: rgb(207, 195, 226);
+}
+
+p {
+    font-size: larger;
+}
+
+body {
+    max-width: 60%;
+    margin: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Notable', sans-serif;
+    text-align: center;
+}
+
+strong {
+    background-color: #E798A9;
+    color: white;
+}
+
+/* navbar styles */
+
+nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    margin: 1em;
+}
+
+nav > a {
+    text-align: center;
+    padding: 1em;
+    background-color: rgb(187, 159, 233);
+    color: black;
+}
+
+nav > a:hover {
+    background-color: rgb(166, 127, 228);
+    transform: scale(1.2, 1.2);
+    transition: all 200ms ease-in;
+}
+
+/* table styles */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: center;
+}
+
+tbody > tr:nth-child(2n - 1) {
+    background-color: lavender;
+}
+
+/* form styles */
+
+form {
+    display: grid;
+    grid-template-columns: max-content minmax(400px, 1fr);
+    gap: 0.5em;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+form > button[type="submit"] {
+    grid-column-start: 2;
+}
+
+/* home page tetris banner styles */
+
+.banner {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* tetrominoe list styles */
+
+#tetrominoe-list {
+    list-style: none;
+}
+
+#tetrominoe-list > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tetrominoe {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+}
+
+.tile {
+    border: 1px solid lightslategray;
+    width: 50px;
+    height: 50px;
+}
+
+.tetrominoe.pink > .tile:not(.empty) {
+    background-color: pink;
+}
+
+.tetrominoe.green > .tile:not(.empty) {
+    background-color: greenyellow;
+}
+
+.tetrominoe.orange > .tile:not(.empty) {
+    background-color: orange;
+}
+
+.tetrominoe.blue > .tile:not(.empty) {
+    background-color: aqua;
+}
+
+.tetrominoe.yellow > .tile:not(.empty) {
+    background-color: yellow;
+}
