@@ -1,0 +1,21 @@
+body {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    margin: 0;
+    justify-items: center;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    transition: color 500ms linear, font-size 500ms linear;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
