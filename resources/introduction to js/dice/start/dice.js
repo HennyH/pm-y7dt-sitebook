@@ -1,14 +1,11 @@
-const FACES = [
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Dice-1.svg/1200px-Dice-1.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Dice-2.svg/1200px-Dice-2.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Dice-3.svg/1024px-Dice-3.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Dice-4.svg/557px-Dice-4.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Dice-5.svg/1200px-Dice-5.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Dice-6.svg/1200px-Dice-6.svg.png",
-];
-
+/**
+ * Generate a random number between a minimum and maxinumum value.
+ * @param {number} min The minimum number to generate.
+ * @param {number} max The maximum number to generate.
+ * @returns {number} A random number between min and max.
+ */
 function random(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }

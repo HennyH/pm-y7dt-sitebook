@@ -3,7 +3,7 @@ body {
     height: 100vh;
     width: 100vw;
     grid-template-columns: 100%;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr 1em;
     margin: 0;
     justify-items: center;
     align-items: center;
@@ -11,11 +11,13 @@ body {
 
 h1 {
     text-align: center;
-    transition: color 500ms linear, font-size 500ms linear;
+    transition: all 500ms linear;
 }
 
 img {
     max-width: 100%;
     max-height: 100%;
+    overflow: auto;
+    padding: 1em;
 }
 
