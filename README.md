@@ -23,6 +23,8 @@ This repository contains will contain all the code for our sitebook, and present
   2. [CSS grid game](https://cssgridgarden.com/)
 - CSS Flexbox
   1. [Flexbox frog game](https://flexboxfroggy.com/)
-- JavaScript
-  1. [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
+
+## JavaScript
+
+1. [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
 
