@@ -19,5 +19,6 @@ img {
     max-height: 100%;
     overflow: auto;
     padding: 1em;
+    box-sizing: border-box;
 }
 
