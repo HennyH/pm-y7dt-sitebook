@@ -33,6 +33,11 @@
     transition: transform 200ms linear;
 }
 
+.card.face-down > * {
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .card.face-up {
     background-color: whitesmoke;
     transform: scaleX(-1);
